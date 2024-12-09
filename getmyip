@@ -5,9 +5,21 @@ if [ -z "$IP" ]; then
     exit 1
 fi
 
+copy_to_clipboard() {
+    echo $OSTYPE
+    if [[ "$OSTYPE" == ^linux ]]; then
+        echo -n "$IP" | xclip -selection clipboard
+    elif [[ "$OSTYPE" =~ ^darwin ]]; then
+        echo "$IP" | pbcopy
+    else
+        echo "Unsupported operating system"
+        exit 1
+    fi
+}
+
 # if --copy is passed, copy the IP to the clipboard
 if [ "$1" == "--copy" ]; then
-    echo -n "$IP" | xclip -selection clipboard
+    copy_to_clipboard
     echo "IP address copied to clipboard"
     exit 0
 else
