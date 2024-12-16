@@ -6,7 +6,6 @@ if [ -z "$IP" ]; then
 fi
 
 copy_to_clipboard() {
-    echo $OSTYPE
     if [[ "$OSTYPE" == ^linux ]]; then
         echo -n "$IP" | xclip -selection clipboard
     elif [[ "$OSTYPE" =~ ^darwin ]]; then
